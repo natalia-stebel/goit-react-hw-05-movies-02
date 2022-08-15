@@ -1,41 +1,35 @@
 import { useState, useEffect } from 'react';
 import { searchMovies } from '../services/api';
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
 import SearchBar from 'components/SearchBar/SearchBar';
 import MovieGallery from '../Gallery/MovieGallery';
 import ButtonGoBack from '../GoBackButton/ButtonGoBack';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import { Spinner } from '../Loader/Loader';
 
 export default function Movies() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searQuery, setSearQuery] = useState([]);
-  const [movies, setMovies] = useState([]);
+  // const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState(null);
 
-  const query = searchParams.get('query') ?? '';
+  // const query = searchParams.get('query') ?? '';
 
   useEffect(() => {
-    if (query === '') {
-      console.log(query);
+    if (!query) {
       return;
     }
-    async function getMovie() {
-      try {
-        const searchRequest = await searchMovies(query);
-        setMovies(searchRequest.results);
-
-        if (searchRequest.length === 0) {
-          return alert(':(  . Please try another name of movie.');
-        }
-        setSearQuery();
-      } catch (error) {}
-    }
-    getMovie();
+    searchMovies(query).then(request => {
+      if (!request.results.length) {
+        toast.error('Ooops:( Try another name');
+        return;
+      }
+      setMovies(request.results);
+    });
   }, [query]);
 
-  const formData = query => {
-    setSearchParams(query);
-    const findData = query !== '' ? { query } : {};
-    setSearchParams(findData);
+  const onClick = request => {
+    setQuery(request);
   };
 
   return (
@@ -43,9 +37,9 @@ export default function Movies() {
       {/* <Spinner /> */}
       <div>
         <ButtonGoBack />
-        <SearchBar onSubmit={formData} value={query} />
-        {searQuery && <MovieGallery movies={movies} />}
+        <SearchBar onSubmit={onClick} value={query} />
+        {movies && <MovieGallery movies={movies} />}
+        <ToastContainer autoClose={2000} />;
       </div>
     </>
   );
-}
