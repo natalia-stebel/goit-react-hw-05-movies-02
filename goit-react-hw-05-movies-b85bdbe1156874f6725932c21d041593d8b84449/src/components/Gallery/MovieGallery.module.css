@@ -1,0 +1,39 @@
+/* body {
+  background: rgb(153, 142, 132);
+  background: linear-gradient(
+    90deg,
+    rgba(153, 142, 132, 0.18531162464985995) 11%,
+    rgba(242, 164, 18, 0.30575980392156865) 96%
+  );
+} */
+
+.galleryList {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2vw;
+  font-size: 5vw;
+  padding: 0.5em;
+  font-size: 16px;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+.galleryItem {
+  padding: 0;
+}
+.galleryItem:hover {
+  -webkit-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  transform: scale(1.03);
+  box-shadow: 10px 5px 5px #e46612;
+}
+
+.movieName {
+  text-decoration: none;
+  font-weight: 700;
+  color: brown;
+  font-size: 20px;
+}
