@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 // import imgErr from '../image/error.jpg';
 
 export default function Cast() {
-  const [casts, setCast] = useState([]);
+  const [casts, setCast] = useState();
   const { movieId } = useParams();
 
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
@@ -12,6 +12,8 @@ export default function Cast() {
   useEffect(() => {
     movieCast(movieId).then(({ casts }) => {
       setCast(casts);
+      console.log(movieId);
+      console.log(casts);
     });
   }, [movieId]);
   return (
