@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { movieReview } from '../services/api';
 
-export default function getMovieReview({ movieId }) {
+export default function Reviews({ movieId }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    movieReview(movieId).then(request => setReviews(request.results));
+    movieReview(movieId).then(setReviews);
   }, [movieId]);
 
   return (
@@ -13,12 +13,15 @@ export default function getMovieReview({ movieId }) {
       {reviews.length > 0 ? (
         <>
           <ul>
-            {reviews.map((review, index) => (
-              <li key={index}>
-                <p>{review.author}</p>
-                <p>{review.content}</p>
-              </li>
-            ))}
+            {console.log(reviews)}
+            {reviews.map(({ id, author, content }) => {
+              return (
+                <li key={id}>
+                  <p>Author: {author}</p>
+                  <p> {content}</p>
+                </li>
+              );
+            })}
           </ul>
         </>
       ) : (
