@@ -20,6 +20,7 @@ export default function MovieCard() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const location = useLocation();
+  const goBack = location.state?.from ?? '/';
 
   useEffect(() => {
     async function getMovie() {
@@ -37,7 +38,7 @@ export default function MovieCard() {
     <>
       {movie && (
         <>
-          <ButtonGoBack />
+          <ButtonGoBack to={goBack} />
           <div>
             <img
               src={'https://image.tmdb.org/t/p/w500/' + movie.poster_path}
