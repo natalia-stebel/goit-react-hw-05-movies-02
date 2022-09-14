@@ -1,9 +1,10 @@
 import { useState, useEffect, Suspense } from 'react';
-import { useParams, Link, useLocation, Outlet } from 'react-router-dom';
+import { useParams, NavLink, useLocation, Outlet } from 'react-router-dom';
 import { movieDetails } from '../services/api';
 // import Cast from './Cast';
 // import { Reviews } from './Reviews';
 // import { lazy } from 'react';
+import css from './styles.module.css';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,34 +38,60 @@ export default function MovieCard() {
   return (
     <>
       {movie && (
-        <>
+        <section className={css.moviesSection}>
           <ButtonGoBack to={goBack} />
           <div>
             <img
-              src={'https://image.tmdb.org/t/p/w500/' + movie.poster_path}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                  : 'https://via.placeholder.com/300x450'
+              }
               alt={movie.title}
+              className={css.moviePoster}
             />
             <div>
-              <p>{movie.title}</p>
-              <span>User score: {movie.vote_average * 10}%</span>
-              <h2>Overview</h2>
-              <p>{movie.overview}</p>
-              <h3>Genres</h3>
-              {movie.genres &&
-                movie.genres.map(genre => <p key={genre.id}> {genre.name} </p>)}
+              <p className={css.movieTitle}>{movie.title}</p>
+              <p className={css.movieScore}>
+                User score: {movie.vote_average * 10}%
+              </p>
+
+              <h2 className={css.movieOverview}>Overview</h2>
+              <div className={css.movieOverviewCont}>
+                <p className={css.movieOverviewText}>{movie.overview}</p>
+              </div>
+
+              <h3 className={css.movieOverview}>Genres</h3>
+              <ul className={css.movieGenres}>
+                {movie.genres &&
+                  movie.genres.map(genre => (
+                    <li className={css.listGenre} key={genre.id}>
+                      {' '}
+                      {genre.name}{' '}
+                    </li>
+                  ))}
+              </ul>
 
               <div>
-                <h2>Additional information</h2>
+                <h2 className={css.movieOverview}>Additional information</h2>
                 <ul>
                   <li>
-                    <Link to="cast" state={{ from: location.state }}>
+                    <NavLink
+                      className={css.link}
+                      to="cast"
+                      state={{ from: location.state }}
+                    >
                       Cast
-                    </Link>
+                    </NavLink>
                   </li>
-                  <li>
-                    <Link to="reviews" state={{ from: location.state }}>
+                  <li className={css.link}>
+                    <NavLink
+                      to="reviews"
+                      state={{ from: location.state }}
+                      className={css.link}
+                    >
                       Reviews
-                    </Link>
+                    </NavLink>
                   </li>
                 </ul>
               </div>
@@ -74,7 +101,7 @@ export default function MovieCard() {
             </Suspense>
             <ToastContainer />
           </div>
-        </>
+        </section>
       )}
     </>
   );

@@ -36,3 +36,107 @@
   font-weight: 700;
   font-size: 20px;
 }
+
+.castList {
+  list-style: none;
+
+  display: grid;
+  grid-template-columns: repeat(8, 200px);
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.castName {
+  font-weight: 600;
+  color: brown;
+  margin-bottom: 0px;
+}
+
+.movieTitle {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 30px;
+  color: brown;
+
+  margin-left: 20px;
+  text-align: center;
+}
+
+.movieScore {
+  margin-left: 20px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.link {
+  font-size: 20px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  color: black;
+}
+
+.link:hover {
+  color: brown;
+  font-weight: bold;
+}
+.moviePoster {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.movieOverview {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: brown;
+
+  margin-left: 20px;
+  text-align: center;
+}
+
+.movieOverviewText {
+  text-align: center;
+}
+
+.movieGenres {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+
+  font-size: 20px;
+}
+
+.movieOverviewCont {
+  max-width: 1200px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+
+  font-size: 20px;
+}
+
+.moviesSection {
+  padding: 40px 40px;
+  min-height: 90vh;
+  height: 100%;
+}
+
+.listGenre {
+  list-style: none;
+}
+
+.castCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewAuthor {
+  font-weight: bold;
+}

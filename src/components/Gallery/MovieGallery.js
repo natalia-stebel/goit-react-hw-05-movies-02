@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import css from './MovieGallery.module.css';
+import PropTypes from 'prop-types';
 
 export default function MovieGallery({ movies }) {
   const location = useLocation();
@@ -29,3 +30,7 @@ export default function MovieGallery({ movies }) {
     </>
   );
 }
+
+MovieGallery.propTypes = {
+  movies: PropTypes.node,
+};

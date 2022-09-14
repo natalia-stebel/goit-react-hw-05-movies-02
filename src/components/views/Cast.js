@@ -2,6 +2,7 @@ import { movieCast, POSTER_URL } from '../services/api';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 // import imgErr from '../image/error.jpg';
+import css from './styles.module.css';
 
 export default function Cast() {
   const { movieId } = useParams();
@@ -15,17 +16,21 @@ export default function Cast() {
   return (
     <>
       {console.log(cast)}
-      <ul>
+      <ul className={css.castList}>
         {cast.map(item => (
-          <li key={item.id}>
+          <li className={css.castCard} key={item.id}>
             <img
-              src={POSTER_URL + item.profile_path}
+              src={
+                item.profile_path === null
+                  ? 'https://via.placeholder.com/200x300'
+                  : POSTER_URL + item.profile_path
+              }
               alt={item.name}
-              width="100"
-              height="150"
+              width="180"
+              height="250"
             />
 
-            <p>{item.name}</p>
+            <p className={css.castName}>{item.name}</p>
             <p>{item.character}</p>
           </li>
         ))}

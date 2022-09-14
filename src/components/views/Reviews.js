@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { movieReview } from '../services/api';
 import { useParams } from 'react-router-dom';
+import css from './styles.module.css';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -19,7 +20,7 @@ const Reviews = () => {
           {reviews.map((review, index) => {
             return (
               <li key={index}>
-                <p>Author:{review.author}</p>
+                <p className={css.reviewAuthor}>Author:{review.author}</p>
                 <p> {review.content}</p>
               </li>
             );
