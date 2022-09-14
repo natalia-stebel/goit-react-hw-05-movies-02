@@ -42,11 +42,7 @@ export default function MovieCard() {
           <ButtonGoBack to={goBack} />
           <div>
             <img
-              src={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-                  : 'https://via.placeholder.com/300x450'
-              }
+              src={'https://image.tmdb.org/t/p/w500/' + movie.poster_path}
               alt={movie.title}
               className={css.moviePoster}
             />
